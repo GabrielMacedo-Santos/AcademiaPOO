@@ -1,12 +1,14 @@
 package GestãoPessoas;
 
 public abstract class Pessoa {
+    // Atributos
     private String nome;
     private String endereco;
     private String telefone;
     private String email;
     private String cpf;
 
+    // Construtor
     public Pessoa(String nome, String endereco, String telefone, String email, String cpf) {
         this.nome = nome;
         this.endereco = endereco;
@@ -15,16 +17,42 @@ public abstract class Pessoa {
         this.cpf = cpf;
     }
 
+    // Métodos Getters
     public String getNome() {
         return nome;
     }
 
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    // Métodos Setters
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public String getCPF() {
-        return cpf;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setCPF(String cpf) {

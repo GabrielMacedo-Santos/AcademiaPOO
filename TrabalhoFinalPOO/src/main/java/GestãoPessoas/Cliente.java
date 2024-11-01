@@ -15,6 +15,44 @@ public class Cliente extends Pessoa {
         this.saldoDevedor = 0;
     }
 
+    // Getters
+    public String getPlano() {
+        return plano;
+    }
+
+    public double getSaldoDevedor() {
+        return saldoDevedor;
+    }
+
+    public String getCpf() {
+        return super.getCpf(); // Retorna o CPF da superclasse
+    }
+
+    // Setters
+    public void setPlano(String plano) {
+        this.plano = plano;
+    }
+
+    public void setSaldoDevedor(double saldoDevedor) {
+        this.saldoDevedor = saldoDevedor;
+    }
+
+    public void setNome(String nome) {
+        super.setNome(nome);
+    }
+
+    public void setEndereco(String endereco) {
+        super.setEndereco(endereco);
+    }
+
+    public void setTelefone(String telefone) {
+        super.setTelefone(telefone);
+    }
+
+    public void setEmail(String email) {
+        super.setEmail(email);
+    }
+
     public void realizarAgendamento(GerenciadorDeAgendamentos gerenciador, String data, double valorAgendamento) {
         gerenciador.adicionarAgendamento(data, valorAgendamento);
         this.saldoDevedor += valorAgendamento;
