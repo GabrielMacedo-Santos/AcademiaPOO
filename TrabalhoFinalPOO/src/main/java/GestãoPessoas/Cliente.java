@@ -2,7 +2,7 @@ package GestãoPessoas;
 
 import SistemaDaAcademia.GerenciadorDeAgendamentos;
 import Academia.Agenda;
-import java.time.LocalDate;
+import java.util.Calendar;
 
 public class Cliente extends Pessoa {
 
@@ -21,22 +21,25 @@ public class Cliente extends Pessoa {
     }
 
     public void cancelarReserva(GerenciadorDeAgendamentos gerenciador, String dataCancelamento, String dataAula) {
-    LocalDate dataCancelamentoLocal = LocalDate.parse(dataCancelamento);
-    LocalDate dataAulaLocal = LocalDate.parse(dataAula);
+        Agenda agendamento = gerenciador.buscarAgendamento(dataAula);
+        if (agendamento != null) {
+            Calendar dataCancelamentoCalendar = Calendar.getInstance();
+            String[] partesDataCancelamento = dataCancelamento.split("-");
+            dataCancelamentoCalendar.set(
+                Integer.parseInt(partesDataCancelamento[0]),
+                Integer.parseInt(partesDataCancelamento[1]) - 1,
+                Integer.parseInt(partesDataCancelamento[2])
+            );
 
-    Agenda agendamento = gerenciador.buscarAgendamento(dataAulaLocal.toString());
-    if (agendamento != null) {
-        boolean dentroTresDiasUteis;
-        dentroTresDiasUteis = agendamento.isDentroTresDiasUteis(dataCancelamentoLocal.toString());
-        double valorRetido = dentroTresDiasUteis ? agendamento.getValorAgendamento() * 0.5 : agendamento.getValorAgendamento();
-        agendamento.cancelarAgendamento(dataCancelamentoLocal.toString());
-        this.saldoDevedor -= valorRetido;
-        System.out.println("Cancelamento realizado. Valor retido: R$ " + valorRetido);
-    } else {
-        System.out.println("Nenhum agendamento encontrado para a data: " + dataAula);
+            boolean dentroTresDiasUteis = agendamento.isDentroTresDiasUteis(dataCancelamentoCalendar);
+            double valorRetido = dentroTresDiasUteis ? agendamento.getValorAgendamento() * 0.5 : agendamento.getValorAgendamento();
+            agendamento.cancelarAgendamento(dataCancelamento);
+            this.saldoDevedor -= valorRetido;
+            System.out.println("Cancelamento realizado. Valor retido: R$ " + valorRetido);
+        } else {
+            System.out.println("Nenhum agendamento encontrado para a data: " + dataAula);
+        }
     }
-}
-
 
     public void realizarPagamento(double valor) {
         this.saldoDevedor -= valor;
