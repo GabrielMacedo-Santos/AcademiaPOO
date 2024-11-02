@@ -1,4 +1,4 @@
-package GestãoPessoas;
+package GestaoPessoas;
 
 public abstract class Pessoa {
     // Atributos

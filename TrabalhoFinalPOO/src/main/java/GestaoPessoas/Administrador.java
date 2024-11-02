@@ -1,4 +1,4 @@
-package GestãoPessoas;
+package GestaoPessoas;
 
 import SistemaDaAcademia.GerenciamentoFuncionario;
 import java.util.ArrayList;

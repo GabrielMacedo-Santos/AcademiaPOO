@@ -1,0 +1,20 @@
+[
+  {
+    "idFuncionario": "1",
+    "cargo": "Adm",
+    "nome": "Gabriel",
+    "endereco": "teste",
+    "telefone": "123",
+    "email": "teste@email.com",
+    "cpf": "123"
+  },
+  {
+    "idFuncionario": "1",
+    "cargo": "professor",
+    "nome": "Luis",
+    "endereco": "teste",
+    "telefone": "123",
+    "email": "teste@email.com",
+    "cpf": "123"
+  }
+]

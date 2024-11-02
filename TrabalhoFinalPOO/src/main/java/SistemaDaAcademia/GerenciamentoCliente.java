@@ -1,6 +1,6 @@
 package SistemaDaAcademia;
 
-import GestãoPessoas.Cliente;
+import GestaoPessoas.Cliente;
 
 public interface GerenciamentoCliente {
 

@@ -1,6 +1,6 @@
 package SistemaDaAcademia;
 
-import GestãoPessoas.Funcionario;
+import GestaoPessoas.Funcionario;
 
 public interface GerenciamentoFuncionario {
     void adicionarFuncionario(Funcionario funcionario);
