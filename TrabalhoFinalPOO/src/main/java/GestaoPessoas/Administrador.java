@@ -7,7 +7,7 @@ public class Administrador extends Funcionario implements GerenciamentoFuncionar
     private ArrayList<Funcionario> funcionarios;
 
     public Administrador(String nome, String endereco, String telefone, String email, String cpf, String idFuncionario, String cargo) {
-        super(nome, endereco, telefone, email, cpf, idFuncionario, cargo);
+        super(nome, endereco, telefone, email, cpf, idFuncionario, cargo = "Adm");
         funcionarios = new ArrayList<>();
     }
 

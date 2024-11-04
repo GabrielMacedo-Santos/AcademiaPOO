@@ -4,18 +4,26 @@ import Loja.Produto;
 import SistemaDaAcademia.GerenciadorDeAgendamentos;
 import java.util.Calendar;
 import Academia.Agenda;
+import java.util.List;
+import json.JsonFuncionario;
 
 public class Funcionario extends Pessoa {
 
     private String idFuncionario;
     private String cargo;
+    private int id;
 
     public Funcionario(String nome, String endereco, String telefone, String email, String cpf, String idFuncionario, String cargo) {
         super(nome, endereco, telefone, email, cpf);
         this.idFuncionario = idFuncionario;
         this.cargo = cargo;
+         this.id = gerarNovoIdFuncionario();
     }
 
+    private static int gerarNovoIdFuncionario() {
+        List<Funcionario> funcionarios = JsonFuncionario.carregar();
+        return funcionarios.size() + 1;
+    }
     public String getIdFuncionario() {
         return idFuncionario;
     }

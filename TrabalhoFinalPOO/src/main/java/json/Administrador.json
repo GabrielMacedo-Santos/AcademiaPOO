@@ -1,5 +1,6 @@
 [
   {
+    "funcionarios": [],
     "idFuncionario": "1",
     "cargo": "Adm",
     "id": 3,
@@ -10,8 +11,9 @@
     "cpf": "123"
   },
   {
+    "funcionarios": [],
     "idFuncionario": "1",
-    "cargo": "professor",
+    "cargo": "Adm",
     "id": 3,
     "nome": "Luis",
     "endereco": "teste",

@@ -1,9 +1,13 @@
 package json;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import java.io.FileWriter;
+import com.google.gson.GsonBuilder; 
+import com.google.gson.reflect.TypeToken;
+import java.io.FileWriter; 
+import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import GestaoPessoas.Cliente;
 
@@ -23,5 +27,20 @@ public static final String CLIENTE_JSON_PATH = "src/main/java/json/Cliente.json"
             e.printStackTrace();
             System.out.println("Erro ao salvar clientes!");
         }
+    }
+     public static List<Cliente> carregarClientes() {
+        Gson gson = new Gson();
+        List<Cliente> clientes = new ArrayList<>();
+
+        try (FileReader reader = new FileReader(CLIENTE_JSON_PATH)) {
+            Type clienteListType = new TypeToken<List<Cliente>>() {}.getType();
+            clientes = gson.fromJson(reader, clienteListType);
+            System.out.println("Clientes carregados com sucesso!");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Erro ao carregar clientes!");
+        }
+
+        return clientes;
     }
 }

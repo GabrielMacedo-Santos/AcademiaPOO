@@ -2,6 +2,7 @@
   {
     "plano": "Premium",
     "saldoDevedor": 0.0,
+    "id": 3,
     "nome": "João Silva",
     "endereco": "Rua A",
     "telefone": "12345678",
@@ -11,6 +12,7 @@
   {
     "plano": "Basic",
     "saldoDevedor": 0.0,
+    "id": 3,
     "nome": "Maria Oliveira",
     "endereco": "Rua B",
     "telefone": "87654321",

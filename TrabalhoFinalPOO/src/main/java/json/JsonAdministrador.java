@@ -1,28 +1,26 @@
 package json;
 
-import GestaoPessoas.Administrador;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
-import GestaoPessoas.Funcionario;
+import com.google.gson.GsonBuilder; 
 import com.google.gson.reflect.TypeToken;
+import java.io.FileWriter; 
 import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import static json.JsonAdministrador.JSON_PATH;
+import java.util.List;
+import GestaoPessoas.Administrador;
 
-public class JsonFuncionario {
-public static final String FUNCIONARIO_JSON_PATH = "src/main/java/json/Funcionario.json";
+public class JsonAdministrador {
+public static final String JSON_PATH = "src/main/java/json/Administrador.json";
 
-    public JsonFuncionario() {}
+    public JsonAdministrador() {}
 
-    public static void salvarFuncionario(List<Funcionario> funcionario) {
+    public static void salvarAdministradores(List<Administrador> administrador) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(funcionario);
+        String json = gson.toJson(administrador);
 
-        try (FileWriter writer = new FileWriter(FUNCIONARIO_JSON_PATH)) {
+        try (FileWriter writer = new FileWriter(JSON_PATH)) {
             writer.write(json);
             System.out.println("Clientes salvos com sucesso!");
         } catch (IOException e) {
@@ -30,9 +28,9 @@ public static final String FUNCIONARIO_JSON_PATH = "src/main/java/json/Funcionar
             System.out.println("Erro ao salvar clientes!");
         }
     }
-      public static List<Funcionario> carregar() {
+    public static List<Administrador> carregar() {
         Gson gson = new Gson();
-        List<Funcionario> dados = new ArrayList<>();
+        List<Administrador> dados = new ArrayList<>();
 
         try (FileReader reader = new FileReader(JSON_PATH)) {
             Type clienteListType = new TypeToken<List<Administrador>>() {}.getType();

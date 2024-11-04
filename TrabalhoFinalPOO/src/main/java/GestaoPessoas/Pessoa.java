@@ -8,6 +8,7 @@ public abstract class Pessoa {
     private String email;
     private String cpf;
 
+
     // Construtor
     public Pessoa(String nome, String endereco, String telefone, String email, String cpf) {
         this.nome = nome;

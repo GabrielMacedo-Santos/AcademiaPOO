@@ -3,18 +3,25 @@ package GestaoPessoas;
 import SistemaDaAcademia.GerenciadorDeAgendamentos;
 import Academia.Agenda;
 import java.util.Calendar;
+import json.JsonCliente;
+import java.util.List; // Adicione esta linha
 
 public class Cliente extends Pessoa {
 
     private String plano;
     private double saldoDevedor;
-
+    private int id;
+    
     public Cliente(String nome, String endereco, String telefone, String email, String cpf, String plano) {
         super(nome, endereco, telefone, email, cpf);
         this.plano = plano;
         this.saldoDevedor = 0;
+        this.id = gerarNovoIdCliente();
     }
-
+    private static int gerarNovoIdCliente() {
+        List<Cliente> clientes = JsonCliente.carregarClientes();
+        return clientes.size() + 1;
+    }
     // Getters
     public String getPlano() {
         return plano;
@@ -24,6 +31,7 @@ public class Cliente extends Pessoa {
         return saldoDevedor;
     }
 
+    @Override
     public String getCpf() {
         return super.getCpf(); // Retorna o CPF da superclasse
     }
