@@ -11,18 +11,31 @@ public class Cliente extends Pessoa {
     private String plano;
     private double saldoDevedor;
     private int id;
-    
+
     public Cliente(String nome, String endereco, String telefone, String email, String cpf, String plano) {
         super(nome, endereco, telefone, email, cpf);
         this.plano = plano;
         this.saldoDevedor = 0;
         this.id = gerarNovoIdCliente();
     }
+
     private static int gerarNovoIdCliente() {
         List<Cliente> clientes = JsonCliente.carregarClientes();
-        return clientes.size() + 1;
+
+        // Encontrar o maior ID existente na lista de clientes
+        int maxId = clientes.stream()
+                .mapToInt(Cliente::getId)
+                .max()
+                .orElse(0); // Se a lista estiver vazia, começa do 0
+
+        return maxId + 1; // Retorna o próximo ID único
     }
+
     // Getters
+    public int getId() {
+        return this.id;
+    }
+
     public String getPlano() {
         return plano;
     }
@@ -72,9 +85,9 @@ public class Cliente extends Pessoa {
             Calendar dataCancelamentoCalendar = Calendar.getInstance();
             String[] partesDataCancelamento = dataCancelamento.split("-");
             dataCancelamentoCalendar.set(
-                Integer.parseInt(partesDataCancelamento[0]),
-                Integer.parseInt(partesDataCancelamento[1]) - 1,
-                Integer.parseInt(partesDataCancelamento[2])
+                    Integer.parseInt(partesDataCancelamento[0]),
+                    Integer.parseInt(partesDataCancelamento[1]) - 1,
+                    Integer.parseInt(partesDataCancelamento[2])
             );
 
             boolean dentroTresDiasUteis = agendamento.isDentroTresDiasUteis(dataCancelamentoCalendar);
