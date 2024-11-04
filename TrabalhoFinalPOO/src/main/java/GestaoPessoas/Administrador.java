@@ -2,6 +2,8 @@ package GestaoPessoas;
 
 import SistemaDaAcademia.GerenciamentoFuncionario;
 import java.util.ArrayList;
+import java.util.List;
+import json.JsonAdministrador;
 
 public class Administrador extends Funcionario implements GerenciamentoFuncionario {
     private ArrayList<Funcionario> funcionarios;
@@ -36,7 +38,7 @@ public class Administrador extends Funcionario implements GerenciamentoFuncionar
             funcionario.setEndereco(novoEndereco);
             funcionario.setTelefone(novoTelefone);
             funcionario.setEmail(novoEmail);
-            funcionario.setCargo(novoCargo); // Supondo que Funcionario tenha um método setCargo
+            funcionario.setCargo(novoCargo);
             System.out.println("Funcionário " + idFuncionario + " editado com sucesso.");
         } else {
             System.out.println("Funcionário com ID " + idFuncionario + " não encontrado.");
@@ -58,5 +60,9 @@ public class Administrador extends Funcionario implements GerenciamentoFuncionar
             }
         }
         return null;
+    }
+
+    public void salvar() {
+        JsonAdministrador.salvarAdministradores(List.of(this));
     }
 }

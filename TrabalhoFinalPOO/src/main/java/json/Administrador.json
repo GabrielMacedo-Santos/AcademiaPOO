@@ -1,0 +1,24 @@
+[
+  {
+    "funcionarios": [],
+    "idFuncionario": "1",
+    "cargo": "Adm",
+    "id": 8,
+    "nome": "Luis",
+    "endereco": "teste",
+    "telefone": "123",
+    "email": "teste@email.com",
+    "cpf": "123"
+  },
+  {
+    "funcionarios": [],
+    "idFuncionario": "1",
+    "cargo": "Adm",
+    "id": 9,
+    "nome": "Luis",
+    "endereco": "teste",
+    "telefone": "123",
+    "email": "teste@email.com",
+    "cpf": "123"
+  }
+]

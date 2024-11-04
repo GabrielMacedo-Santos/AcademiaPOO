@@ -3,7 +3,7 @@ package Loja;
 import java.util.ArrayList;
 
 public class Estoque {
-    private ArrayList<Produto> produtos;
+    private final ArrayList<Produto> produtos;
 
     public Estoque() {
         produtos = new ArrayList<>();

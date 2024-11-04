@@ -17,13 +17,19 @@ public class Funcionario extends Pessoa {
         super(nome, endereco, telefone, email, cpf);
         this.idFuncionario = idFuncionario;
         this.cargo = cargo;
-         this.id = gerarNovoIdFuncionario();
+        this.id = gerarNovoIdFuncionario();
     }
 
     private static int gerarNovoIdFuncionario() {
         List<Funcionario> funcionarios = JsonFuncionario.carregar();
-        return funcionarios.size() + 1;
+        if (funcionarios.isEmpty()) {
+            return 1;
+        } else {
+            int lastId = funcionarios.get(funcionarios.size() - 1).id;
+            return lastId + 1;
+        }
     }
+
     public String getIdFuncionario() {
         return idFuncionario;
     }

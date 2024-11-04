@@ -1,0 +1,42 @@
+[
+  {
+    "idFuncionario": "1",
+    "cargo": "Adm",
+    "id": 5,
+    "nome": "Gabriel",
+    "endereco": "teste",
+    "telefone": "123",
+    "email": "teste@email.com",
+    "cpf": "123"
+  },
+  {
+    "idFuncionario": "1",
+    "cargo": "Adm",
+    "id": 6,
+    "nome": "Gabriel",
+    "endereco": "teste",
+    "telefone": "123",
+    "email": "teste@email.com",
+    "cpf": "123"
+  },
+  {
+    "idFuncionario": "1",
+    "cargo": "Adm",
+    "id": 7,
+    "nome": "Gabriel",
+    "endereco": "teste",
+    "telefone": "123",
+    "email": "teste@email.com",
+    "cpf": "123"
+  },
+  {
+    "idFuncionario": "1",
+    "cargo": "Adm",
+    "id": 8,
+    "nome": "Gabriel",
+    "endereco": "teste",
+    "telefone": "123",
+    "email": "teste@email.com",
+    "cpf": "123"
+  }
+]

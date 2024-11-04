@@ -1,48 +1,50 @@
 package json;
 
-import GestaoPessoas.Administrador;
+import GestaoPessoas.Funcionario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
-import GestaoPessoas.Funcionario;
 import com.google.gson.reflect.TypeToken;
+import java.io.FileWriter;
 import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import static json.JsonAdministrador.JSON_PATH;
+import java.util.List;
 
 public class JsonFuncionario {
-public static final String FUNCIONARIO_JSON_PATH = "src/main/java/json/Funcionario.json";
+    public static final String FUNCIONARIO_JSON_PATH = "src/main/java/json/Funcionario.json";
 
     public JsonFuncionario() {}
 
-    public static void salvarFuncionario(List<Funcionario> funcionario) {
+    public static void salvarFuncionario(List<Funcionario> novosFuncionarios) {
+        List<Funcionario> funcionariosExistentes = carregar();
+        funcionariosExistentes.addAll(novosFuncionarios);  // Adiciona novos funcionários à lista existente
+
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(funcionario);
+        String json = gson.toJson(funcionariosExistentes);
 
         try (FileWriter writer = new FileWriter(FUNCIONARIO_JSON_PATH)) {
             writer.write(json);
-            System.out.println("Clientes salvos com sucesso!");
+            System.out.println("Funcionários salvos com sucesso!");
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Erro ao salvar clientes!");
+            System.out.println("Erro ao salvar funcionários!");
         }
     }
-      public static List<Funcionario> carregar() {
-        Gson gson = new Gson();
-        List<Funcionario> dados = new ArrayList<>();
 
-        try (FileReader reader = new FileReader(JSON_PATH)) {
-            Type clienteListType = new TypeToken<List<Administrador>>() {}.getType();
-            dados = gson.fromJson(reader, clienteListType);
-            System.out.println("Clientes carregados com sucesso!");
+    public static List<Funcionario> carregar() {
+        Gson gson = new Gson();
+        List<Funcionario> funcionarios = new ArrayList<>();
+
+        try (FileReader reader = new FileReader(FUNCIONARIO_JSON_PATH)) {
+            Type funcionarioListType = new TypeToken<List<Funcionario>>() {}.getType();
+            funcionarios = gson.fromJson(reader, funcionarioListType);
+            System.out.println("Funcionários carregados com sucesso!");
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Erro ao carregar clientes!");
+            System.out.println("Erro ao carregar funcionários!");
         }
 
-        return dados;
+        return funcionarios;
     }
 }
