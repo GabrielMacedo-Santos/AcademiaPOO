@@ -26,7 +26,6 @@ public class Produto {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
-
     public boolean verificarEstoque() {
         return quantidade > 0;
     }

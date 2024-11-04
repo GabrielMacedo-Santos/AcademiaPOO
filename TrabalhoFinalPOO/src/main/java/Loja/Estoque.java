@@ -2,11 +2,11 @@ package Loja;
 
 import java.util.ArrayList;
 
-public class Estoque {
-    private final ArrayList<Produto> produtos;
+public abstract class Estoque {
+    protected ArrayList<Produto> produtos;
 
     public Estoque() {
-        produtos = new ArrayList<>();
+        this.produtos = new ArrayList<>();
     }
 
     public void adicionarProduto(Produto produto) {
@@ -45,21 +45,17 @@ public class Estoque {
         }
     }
 
+    // Novo método para verificar disponibilidade
     public boolean verificarDisponibilidade(String nomeProduto, int quantidade) {
         Produto produto = buscarProduto(nomeProduto);
-        if (produto != null && produto.getQuantidade() >= quantidade) {
-            return true;
-        } else {
-            System.out.println("Produto " + nomeProduto + " com quantidade insuficiente no estoque.");
-            return false;
-        }
+        return produto != null && produto.getQuantidade() >= quantidade;
     }
 
+    // Novo método para reduzir o estoque
     public void reduzirEstoque(String nomeProduto, int quantidade) {
         Produto produto = buscarProduto(nomeProduto);
         if (produto != null) {
             produto.reduzirQuantidade(quantidade);
-            System.out.println("Quantidade atualizada para o produto " + produto.getNome() + ": " + produto.getQuantidade());
         }
     }
 }

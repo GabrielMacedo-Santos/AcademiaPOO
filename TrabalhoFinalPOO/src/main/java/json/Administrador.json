@@ -20,5 +20,27 @@
     "telefone": "123",
     "email": "teste@email.com",
     "cpf": "123"
+  },
+  {
+    "funcionarios": [],
+    "idFuncionario": "3",
+    "cargo": "Adm",
+    "id": 10,
+    "nome": "Luis",
+    "endereco": "Endereço Adm 1",
+    "telefone": "789",
+    "email": "luis@email.com",
+    "cpf": "12345678900"
+  },
+  {
+    "funcionarios": [],
+    "idFuncionario": "4",
+    "cargo": "Adm",
+    "id": 10,
+    "nome": "Pedro",
+    "endereco": "Endereço Adm 2",
+    "telefone": "012",
+    "email": "pedro@email.com",
+    "cpf": "11223344556"
   }
 ]
