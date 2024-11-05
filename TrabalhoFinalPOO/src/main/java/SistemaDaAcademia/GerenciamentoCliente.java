@@ -1,13 +1,17 @@
 package SistemaDaAcademia;
-
 import GestaoPessoas.Cliente;
 
 public interface GerenciamentoCliente {
 
-    // Métodos para gerenciamento de clientes
+    // Método para adicionar um cliente
     void adicionarCliente(Cliente cliente);
-    void removerCliente(String cpf);
-    void editarCliente(Cliente clienteEditado);
 
-    
+    // Método para remover um cliente pelo CPF
+    void removerCliente(String cpf);
+
+    // Método para editar um cliente usando o CPF e novas informações
+    void editarCliente(String cpf, String novoNome, String novoEndereco, String novoTelefone, String novoEmail, String novoPlano);
+
+    // Método para listar todos os clientes
+    void listarClientes();
 }

@@ -4,8 +4,7 @@ import SistemaDaAcademia.GerenciadorDeAgendamentos;
 import Academia.Agenda;
 import java.util.Calendar;
 import json.JsonCliente;
-import java.util.List; // Adicione esta linha
-
+import java.util.List;
 public class Cliente extends Pessoa {
 
     private String plano;

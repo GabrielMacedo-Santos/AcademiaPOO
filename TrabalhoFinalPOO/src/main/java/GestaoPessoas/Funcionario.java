@@ -2,22 +2,26 @@ package GestaoPessoas;
 
 import Loja.Produto;
 import SistemaDaAcademia.GerenciadorDeAgendamentos;
+import java.util.ArrayList;
 import java.util.Calendar;
 import Academia.Agenda;
+import SistemaDaAcademia.GerenciamentoCliente;
 import java.util.List;
 import json.JsonFuncionario;
 
-public class Funcionario extends Pessoa {
+public class Funcionario extends Pessoa implements GerenciamentoCliente {
 
     private String idFuncionario;
     private String cargo;
     private int id;
+    private List<Cliente> clientes;
 
     public Funcionario(String nome, String endereco, String telefone, String email, String cpf, String idFuncionario, String cargo) {
         super(nome, endereco, telefone, email, cpf);
         this.idFuncionario = idFuncionario;
         this.cargo = cargo;
         this.id = gerarNovoIdFuncionario();
+        this.clientes = new ArrayList<>();
     }
 
     private static int gerarNovoIdFuncionario() {
@@ -68,8 +72,65 @@ public class Funcionario extends Pessoa {
         }
     }
 
+    // Implementação dos métodos de GerenciamentoCliente
     @Override
+    public void adicionarCliente(Cliente cliente) {
+        clientes.add(cliente);
+        System.out.println("Cliente " + cliente.getNome() + " adicionado.");
+    }
+
+    @Override
+    public void removerCliente(String cpf) {
+        Cliente cliente = buscarCliente(cpf);
+        if (cliente != null) {
+            clientes.remove(cliente);
+            System.out.println("Cliente " + cliente.getNome() + " removido.");
+        } else {
+            System.out.println("Cliente com CPF " + cpf + " não encontrado.");
+        }
+    }
+
+    @Override
+    public void editarCliente(String cpf, String novoNome, String novoEndereco, String novoTelefone, String novoEmail, String novoPlano) {
+        Cliente cliente = buscarCliente(cpf);
+        if (cliente != null) {
+            cliente.setNome(novoNome);
+            cliente.setEndereco(novoEndereco);
+            cliente.setTelefone(novoTelefone);
+            cliente.setEmail(novoEmail);
+            cliente.setPlano(novoPlano);
+            System.out.println("Cliente " + cpf + " editado com sucesso.");
+        } else {
+            System.out.println("Cliente com CPF " + cpf + " não encontrado.");
+        }
+    }
+
+    @Override
+    public void listarClientes() {
+        if (clientes.isEmpty()) {
+            System.out.println("Nenhum cliente cadastrado.");
+        } else {
+            System.out.println("Lista de Clientes:");
+            for (Cliente cliente : clientes) {
+                System.out.println("Nome: " + cliente.getNome() + ", CPF: " + cliente.getCpf());
+            }
+        }
+    }
+
+    private Cliente buscarCliente(String cpf) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getCpf().equals(cpf)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
+
+     @Override
     public void exibirDados() {
-        System.out.println(super.toString() + "\nID Funcionário: " + idFuncionario + "\nCargo: " + cargo);
+        System.out.println(super.toString() +
+            "\nID Funcionário: " + idFuncionario +
+            "\nCargo: " + cargo +
+            "\nID: " + id);
     }
 }

@@ -58,5 +58,25 @@
     "telefone": "456",
     "email": "ana@email.com",
     "cpf": "09876543211"
+  },
+  {
+    "idFuncionario": "1",
+    "cargo": "Instrutor",
+    "id": 10,
+    "nome": "Gabriel",
+    "endereco": "Endereço Func 1",
+    "telefone": "123",
+    "email": "gabriel@email.com",
+    "cpf": "12345678900"
+  },
+  {
+    "idFuncionario": "2",
+    "cargo": "Recepcionista",
+    "id": 10,
+    "nome": "Ana",
+    "endereco": "Endereço Func 2",
+    "telefone": "456",
+    "email": "ana@email.com",
+    "cpf": "09876543211"
   }
 ]
