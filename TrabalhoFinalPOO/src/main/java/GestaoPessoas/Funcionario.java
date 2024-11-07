@@ -1,38 +1,45 @@
 package GestaoPessoas;
 
-import Loja.Produto;
+import Autenticacao.Usuario;
 import SistemaDaAcademia.GerenciadorDeAgendamentos;
-import java.util.ArrayList;
-import java.util.Calendar;
-import Academia.Agenda;
-import SistemaDaAcademia.GerenciamentoCliente;
-import java.util.List;
+import SistemaDaAcademia.GerenciadorDeAgendamentos.Agendamento;
+import json.JsonCliente;
 import json.JsonFuncionario;
 
-public class Funcionario extends Pessoa implements GerenciamentoCliente {
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
+public class Funcionario extends Usuario {
+    private static int contadorIdFuncionario = 0; // Contador para gerar IDs únicos
     private String idFuncionario;
     private String cargo;
-    private int id;
-    private List<Cliente> clientes;
+    private String nome;
+    private String endereco;
+    private String telefone;
+    private String email;
+    private String cpf;
 
-    public Funcionario(String nome, String endereco, String telefone, String email, String cpf, String idFuncionario, String cargo) {
-        super(nome, endereco, telefone, email, cpf);
-        this.idFuncionario = idFuncionario;
+    public Funcionario(String usuario, String senha, String nome, String endereco, String telefone, String email, String cpf, String cargo) {
+        super(usuario, senha);
+        this.idFuncionario = gerarNovoIdFuncionario();
+        this.nome = nome;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.email = email;
+        this.cpf = cpf;
         this.cargo = cargo;
-        this.id = gerarNovoIdFuncionario();
-        this.clientes = new ArrayList<>();
+
+        JsonFuncionario.salvarFuncionario(this); // Salva o novo funcionário ao criá-lo
     }
 
-    private static int gerarNovoIdFuncionario() {
-        List<Funcionario> funcionarios = JsonFuncionario.carregar();
-        if (funcionarios.isEmpty()) {
-            return 1;
-        } else {
-            int lastId = funcionarios.get(funcionarios.size() - 1).id;
-            return lastId + 1;
-        }
+    // Método para gerar um novo ID único para cada funcionário
+    private static String gerarNovoIdFuncionario() {
+        contadorIdFuncionario++;
+        return "FUNC-" + contadorIdFuncionario;
     }
+
+    // Getters e setters corrigidos
 
     public String getIdFuncionario() {
         return idFuncionario;
@@ -44,93 +51,86 @@ public class Funcionario extends Pessoa implements GerenciamentoCliente {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
+        JsonFuncionario.salvarFuncionario(this); // Salva automaticamente após alterar o cargo
     }
 
-    public void verificarEstoqueProduto(Produto produto) {
-        if (produto.verificarEstoque()) {
-            System.out.println("Produto disponível em estoque.");
-        } else {
-            System.out.println("Produto indisponível.");
-        }
+    public String getNome() {
+        return nome;
     }
 
-    public void cancelarAgendamento(GerenciadorDeAgendamentos gerenciador, String dataCancelamento, String dataAula) {
-        Agenda agendamento = gerenciador.buscarAgendamento(dataAula);
+    public void setNome(String nome) {
+        this.nome = nome;
+        JsonFuncionario.salvarFuncionario(this); // Salva automaticamente após alterar o nome
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+        JsonFuncionario.salvarFuncionario(this); // Salva automaticamente após alterar o endereço
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+        JsonFuncionario.salvarFuncionario(this); // Salva automaticamente após alterar o telefone
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+        JsonFuncionario.salvarFuncionario(this); // Salva automaticamente após alterar o email
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+        JsonFuncionario.salvarFuncionario(this); // Salva automaticamente após alterar o CPF
+    }
+
+    // Método para cancelar uma reserva
+    public void cancelarReserva(GerenciadorDeAgendamentos gerenciador, String dataCancelamento, String dataAula, String cpfCliente) {
+        Agendamento agendamento = gerenciador.buscarAgendamentoPorDataECpf(dataAula, cpfCliente);
         if (agendamento != null) {
-            Calendar dataCancelamentoCalendar = Calendar.getInstance();
-            String[] partesDataCancelamento = dataCancelamento.split("-");
-            dataCancelamentoCalendar.set(
-                Integer.parseInt(partesDataCancelamento[0]),
-                Integer.parseInt(partesDataCancelamento[1]) - 1,
-                Integer.parseInt(partesDataCancelamento[2])
-            );
+            LocalDate dataCancelamentoLocalDate = LocalDate.parse(dataCancelamento, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDate dataAulaLocalDate = LocalDate.parse(dataAula, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-            agendamento.cancelarAgendamento(dataCancelamento);
-            System.out.println("Cancelamento realizado com sucesso para a data: " + dataAula);
-        } else {
-            System.out.println("Nenhum agendamento encontrado para a data: " + dataAula);
-        }
-    }
+            boolean dentroTresDiasUteis = gerenciador.isDentroTresDiasUteis(dataCancelamentoLocalDate, dataAulaLocalDate);
+            double valorRetido = dentroTresDiasUteis ? agendamento.getValorAgendamento() * 0.5 : agendamento.getValorAgendamento();
+            gerenciador.cancelarAgendamento(agendamento);
 
-    // Implementação dos métodos de GerenciamentoCliente
-    @Override
-    public void adicionarCliente(Cliente cliente) {
-        clientes.add(cliente);
-        System.out.println("Cliente " + cliente.getNome() + " adicionado.");
-    }
-
-    @Override
-    public void removerCliente(String cpf) {
-        Cliente cliente = buscarCliente(cpf);
-        if (cliente != null) {
-            clientes.remove(cliente);
-            System.out.println("Cliente " + cliente.getNome() + " removido.");
-        } else {
-            System.out.println("Cliente com CPF " + cpf + " não encontrado.");
-        }
-    }
-
-    @Override
-    public void editarCliente(String cpf, String novoNome, String novoEndereco, String novoTelefone, String novoEmail, String novoPlano) {
-        Cliente cliente = buscarCliente(cpf);
-        if (cliente != null) {
-            cliente.setNome(novoNome);
-            cliente.setEndereco(novoEndereco);
-            cliente.setTelefone(novoTelefone);
-            cliente.setEmail(novoEmail);
-            cliente.setPlano(novoPlano);
-            System.out.println("Cliente " + cpf + " editado com sucesso.");
-        } else {
-            System.out.println("Cliente com CPF " + cpf + " não encontrado.");
-        }
-    }
-
-    @Override
-    public void listarClientes() {
-        if (clientes.isEmpty()) {
-            System.out.println("Nenhum cliente cadastrado.");
-        } else {
-            System.out.println("Lista de Clientes:");
-            for (Cliente cliente : clientes) {
-                System.out.println("Nome: " + cliente.getNome() + ", CPF: " + cliente.getCpf());
+            Cliente cliente = buscarCliente(cpfCliente);
+            if (cliente != null) {
+                cliente.setSaldoDevedor(cliente.getSaldoDevedor() - valorRetido);
+                JsonCliente.salvarCliente(cliente); // Salva cliente atualizado
+                System.out.println("Cancelamento realizado para o cliente " + cliente.getNome() + ". Valor retido: R$ " + valorRetido + ". Saldo devedor atualizado: R$ " + cliente.getSaldoDevedor());
+            } else {
+                System.out.println("Erro: Cliente não encontrado. Não foi possível atualizar o saldo.");
             }
+        } else {
+            System.out.println("Nenhum agendamento encontrado para a data: " + dataAula + " e CPF: " + cpfCliente);
         }
     }
 
-    private Cliente buscarCliente(String cpf) {
+    // Método para buscar cliente pelo CPF usando persistência em JSON
+    private Cliente buscarCliente(String cpfCliente) {
+        List<Cliente> clientes = JsonCliente.carregarClientes(); // Carrega clientes do arquivo JSON
         for (Cliente cliente : clientes) {
-            if (cliente.getCpf().equals(cpf)) {
+            if (cliente.getCpf().equals(cpfCliente)) {
                 return cliente;
             }
         }
-        return null;
-    }
-
-     @Override
-    public void exibirDados() {
-        System.out.println(super.toString() +
-            "\nID Funcionário: " + idFuncionario +
-            "\nCargo: " + cargo +
-            "\nID: " + id);
+        return null; // Retorna null se o cliente não for encontrado
     }
 }

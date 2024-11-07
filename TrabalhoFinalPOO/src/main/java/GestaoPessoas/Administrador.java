@@ -1,68 +1,56 @@
 package GestaoPessoas;
 
-import SistemaDaAcademia.GerenciamentoFuncionario;
-import java.util.ArrayList;
+import json.JsonFuncionario;
+
 import java.util.List;
-import json.JsonAdministrador;
 
-public class Administrador extends Funcionario implements GerenciamentoFuncionario {
-    private ArrayList<Funcionario> funcionarios;
+public class Administrador extends Funcionario {
 
-    public Administrador(String nome, String endereco, String telefone, String email, String cpf, String idFuncionario, String cargo) {
-        super(nome, endereco, telefone, email, cpf, idFuncionario, cargo = "Adm");
-        funcionarios = new ArrayList<>();
+    public Administrador(String usuario, String senha, String nome, String endereco, String telefone, String email, String cpf) {
+        super(usuario, senha, nome, endereco, telefone, email, cpf, "Administrador");
     }
 
-    @Override
+    // Métodos para gerenciar funcionários
+
+    // Método para adicionar um funcionário
     public void adicionarFuncionario(Funcionario funcionario) {
-        funcionarios.add(funcionario);
+        JsonFuncionario.salvarFuncionario(funcionario); // Salva o novo funcionário ou atualiza se já existir
         System.out.println("Funcionário " + funcionario.getNome() + " adicionado.");
     }
 
-    @Override
+    // Método para remover um funcionário pelo ID
     public void removerFuncionario(String idFuncionario) {
-        Funcionario funcionario = buscarFuncionario(idFuncionario);
-        if (funcionario != null) {
-            funcionarios.remove(funcionario);
-            System.out.println("Funcionário " + funcionario.getNome() + " removido.");
-        } else {
-            System.out.println("Funcionário com ID " + idFuncionario + " não encontrado.");
-        }
+        JsonFuncionario.removerFuncionario(idFuncionario); // Remove o funcionário pelo ID do JSON
     }
 
-    @Override
+    // Método para editar um funcionário
     public void editarFuncionario(String idFuncionario, String novoNome, String novoEndereco, String novoTelefone, String novoEmail, String novoCargo) {
-        Funcionario funcionario = buscarFuncionario(idFuncionario);
-        if (funcionario != null) {
-            funcionario.setNome(novoNome);
-            funcionario.setEndereco(novoEndereco);
-            funcionario.setTelefone(novoTelefone);
-            funcionario.setEmail(novoEmail);
-            funcionario.setCargo(novoCargo);
-            System.out.println("Funcionário " + idFuncionario + " editado com sucesso.");
-        } else {
-            System.out.println("Funcionário com ID " + idFuncionario + " não encontrado.");
-        }
-    }
-
-    @Override
-    public void listarFuncionarios() {
-        System.out.println("Lista de Funcionários:");
-        for (Funcionario funcionario : funcionarios) {
-            System.out.println(funcionario.getNome() + " - ID: " + funcionario.getIdFuncionario());
-        }
-    }
-
-    private Funcionario buscarFuncionario(String idFuncionario) {
+        List<Funcionario> funcionarios = JsonFuncionario.carregarFuncionarios();
         for (Funcionario funcionario : funcionarios) {
             if (funcionario.getIdFuncionario().equals(idFuncionario)) {
-                return funcionario;
+                funcionario.setNome(novoNome);
+                funcionario.setEndereco(novoEndereco);
+                funcionario.setTelefone(novoTelefone);
+                funcionario.setEmail(novoEmail);
+                funcionario.setCargo(novoCargo);
+                JsonFuncionario.salvarFuncionario(funcionario); // Atualiza e salva o funcionário no JSON
+                System.out.println("Funcionário com ID " + idFuncionario + " editado com sucesso.");
+                return;
             }
         }
-        return null;
+        System.out.println("Funcionário com ID " + idFuncionario + " não encontrado.");
     }
 
-    public void salvar() {
-        JsonAdministrador.salvarAdministradores(List.of(this));
+    // Método para listar todos os funcionários
+    public void listarFuncionarios() {
+        List<Funcionario> funcionarios = JsonFuncionario.carregarFuncionarios();
+        if (funcionarios.isEmpty()) {
+            System.out.println("Nenhum funcionário encontrado.");
+        } else {
+            System.out.println("\n=== Lista de Funcionários ===");
+            for (Funcionario funcionario : funcionarios) {
+                System.out.println("Nome: " + funcionario.getNome() + ", ID: " + funcionario.getIdFuncionario() + ", Cargo: " + funcionario.getCargo());
+            }
+        }
     }
 }

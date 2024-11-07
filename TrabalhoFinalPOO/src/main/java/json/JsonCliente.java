@@ -3,27 +3,23 @@ package json;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import java.io.FileWriter;
+import GestaoPessoas.Cliente;
+
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import GestaoPessoas.Cliente;
 
 public class JsonCliente {
 
-    public static final String CLIENTE_JSON_PATH = "src/main/java/json/Cliente.json";
+    private static final String CLIENTE_JSON_PATH = "src/main/java/json/Cliente.json";
 
-    public JsonCliente() {
-    }
-
-    public static void salvarClientes(List<Cliente> novosClientes) {
-        List<Cliente> clientesExistentes = carregarClientes(); // Carrega clientes existentes do JSON
-        clientesExistentes.addAll(novosClientes); // Adiciona novos clientes à lista existente
-
+    // Método para salvar uma lista completa de clientes no JSON
+    public static void salvarClientes(List<Cliente> clientes) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(clientesExistentes);
+        String json = gson.toJson(clientes);
 
         try (FileWriter writer = new FileWriter(CLIENTE_JSON_PATH)) {
             writer.write(json);
@@ -34,13 +30,13 @@ public class JsonCliente {
         }
     }
 
+    // Método para carregar todos os clientes do arquivo JSON
     public static List<Cliente> carregarClientes() {
         Gson gson = new Gson();
         List<Cliente> clientes = new ArrayList<>();
 
         try (FileReader reader = new FileReader(CLIENTE_JSON_PATH)) {
-            Type clienteListType = new TypeToken<List<Cliente>>() {
-            }.getType();
+            Type clienteListType = new TypeToken<List<Cliente>>() {}.getType();
             clientes = gson.fromJson(reader, clienteListType);
             System.out.println("Clientes carregados com sucesso!");
         } catch (IOException e) {
@@ -49,5 +45,68 @@ public class JsonCliente {
         }
 
         return clientes;
+    }
+
+    // Método para salvar um único cliente no JSON (atualiza ou adiciona)
+    public static void salvarCliente(Cliente cliente) {
+        List<Cliente> clientesExistentes = carregarClientes();
+
+        // Verifica se o cliente já existe para evitar duplicidade
+        boolean clienteExiste = false;
+        for (int i = 0; i < clientesExistentes.size(); i++) {
+            Cliente c = clientesExistentes.get(i);
+            if (c.getCpf().equals(cliente.getCpf())) {
+                // Atualiza os dados do cliente existente
+                clientesExistentes.set(i, cliente);
+                clienteExiste = true;
+                break;
+            }
+        }
+
+        // Caso não exista, adiciona o novo cliente
+        if (!clienteExiste) {
+            clientesExistentes.add(cliente);
+        }
+
+        // Salva a lista atualizada no arquivo JSON
+        salvarClientes(clientesExistentes);
+    }
+
+    // Método para remover um cliente da lista pelo CPF
+    public static void removerCliente(String cpf) {
+        List<Cliente> clientesExistentes = carregarClientes();
+
+        // Encontra e remove o cliente pelo CPF
+        Cliente clienteParaRemover = null;
+        for (Cliente cliente : clientesExistentes) {
+            if (cliente.getCpf().equals(cpf)) {
+                clienteParaRemover = cliente;
+                break;
+            }
+        }
+
+        if (clienteParaRemover != null) {
+            clientesExistentes.remove(clienteParaRemover);
+            System.out.println("Cliente com CPF " + cpf + " removido com sucesso.");
+        } else {
+            System.out.println("Cliente com CPF " + cpf + " não encontrado.");
+        }
+
+        // Salva a lista atualizada no arquivo JSON
+        salvarClientes(clientesExistentes);
+    }
+
+    // Método para buscar um cliente pelo CPF
+    public static Cliente buscarCliente(String cpf) {
+        List<Cliente> clientesExistentes = carregarClientes();
+
+        for (Cliente cliente : clientesExistentes) {
+            if (cliente.getCpf().equals(cpf)) {
+                return cliente;
+            }
+        }
+
+        System.out.println("Cliente com CPF " + cpf + " não encontrado.");
+        return null;
     }
 }
