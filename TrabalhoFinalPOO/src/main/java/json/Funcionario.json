@@ -1,85 +1,13 @@
 [
   {
-    "idFuncionario": "1",
-    "cargo": "Adm",
+    "idFuncionario": "FUNC-2",
+    "cargo": "instrutor",
     "nome": "Gabriel",
-    "endereco": "teste",
-    "telefone": "123",
-    "email": "teste@email.com",
-    "cpf": "123"
-  },
-  {
-    "idFuncionario": "1",
-    "cargo": "Adm",
-    "nome": "Gabriel",
-    "endereco": "teste",
-    "telefone": "123",
-    "email": "teste@email.com",
-    "cpf": "123"
-  },
-  {
-    "idFuncionario": "1",
-    "cargo": "Adm",
-    "nome": "Gabriel",
-    "endereco": "teste",
-    "telefone": "123",
-    "email": "teste@email.com",
-    "cpf": "123"
-  },
-  {
-    "idFuncionario": "1",
-    "cargo": "Adm",
-    "nome": "Gabriel",
-    "endereco": "teste",
-    "telefone": "123",
-    "email": "teste@email.com",
-    "cpf": "123"
-  },
-  {
-    "idFuncionario": "1",
-    "cargo": "Instrutor",
-    "nome": "Gabriel",
-    "endereco": "Endereço Func 1",
-    "telefone": "123",
-    "email": "gabriel@email.com",
-    "cpf": "12345678900"
-  },
-  {
-    "idFuncionario": "2",
-    "cargo": "Recepcionista",
-    "nome": "Ana",
-    "endereco": "Endereço Func 2",
-    "telefone": "456",
-    "email": "ana@email.com",
-    "cpf": "09876543211"
-  },
-  {
-    "idFuncionario": "1",
-    "cargo": "Instrutor",
-    "nome": "Gabriel",
-    "endereco": "Endereço Func 1",
-    "telefone": "123",
-    "email": "gabriel@email.com",
-    "cpf": "12345678900"
-  },
-  {
-    "idFuncionario": "2",
-    "cargo": "Recepcionista",
-    "nome": "Ana",
-    "endereco": "Endereço Func 2",
-    "telefone": "456",
-    "email": "ana@email.com",
-    "cpf": "09876543211"
-  },
-  {
-    "idFuncionario": "FUNC-1",
-    "cargo": "Administrador",
-    "nome": "Administrador Geral",
-    "endereco": "Rua A, 123",
-    "telefone": "9999-9999",
-    "email": "admin@academia.com",
-    "cpf": "123.456.789-00",
-    "usuario": "admin",
+    "endereco": "fasfda",
+    "telefone": "dasd",
+    "email": "afsafa",
+    "cpf": "312312",
+    "usuario": "usuarioGabriel",
     "senha": "senha123"
   }
 ]

@@ -1,122 +1,12 @@
 [
   {
-    "plano": "Premium",
+    "plano": "3 meses",
     "saldoDevedor": 0.0,
-    "id": 1,
-    "nome": "João Silva",
-    "endereco": "Rua A",
-    "telefone": "12345678",
-    "email": "joao@example.com",
-    "cpf": "111.111.111-11"
-  },
-  {
-    "plano": "Premium",
-    "saldoDevedor": 0.0,
-    "id": 2,
-    "nome": "João Silva",
-    "endereco": "Rua A",
-    "telefone": "12345678",
-    "email": "joao@example.com",
-    "cpf": "111.111.111-11"
-  },
-  {
-    "plano": "Premium",
-    "saldoDevedor": 0.0,
-    "id": 3,
-    "nome": "João Silva",
-    "endereco": "Rua A",
-    "telefone": "12345678",
-    "email": "joao@example.com",
-    "cpf": "111.111.111-11"
-  },
-  {
-    "plano": "Premium",
-    "saldoDevedor": 0.0,
-    "id": 4,
-    "nome": "João Silva",
-    "endereco": "Rua A",
-    "telefone": "12345678",
-    "email": "joao@example.com",
-    "cpf": "111.111.111-11"
-  },
-  {
-    "plano": "Premium",
-    "saldoDevedor": 0.0,
-    "id": 5,
-    "nome": "João Silva",
-    "endereco": "Rua A",
-    "telefone": "12345678",
-    "email": "joao@example.com",
-    "cpf": "111.111.111-11"
-  },
-  {
-    "plano": "Premium",
-    "saldoDevedor": 0.0,
-    "id": 6,
-    "nome": "João Silva",
-    "endereco": "Rua A",
-    "telefone": "12345678",
-    "email": "joao@example.com",
-    "cpf": "111.111.111-11"
-  },
-  {
-    "plano": "Premium",
-    "saldoDevedor": 0.0,
-    "id": 7,
-    "nome": "João Silva",
-    "endereco": "Rua A",
-    "telefone": "12345678",
-    "email": "joao@example.com",
-    "cpf": "111.111.111-11"
-  },
-  {
-    "plano": "Premium",
-    "saldoDevedor": 0.0,
-    "id": 8,
-    "nome": "João Silva",
-    "endereco": "Rua A",
-    "telefone": "12345678",
-    "email": "joao@example.com",
-    "cpf": "111.111.111-11"
-  },
-  {
-    "plano": "Premium",
-    "saldoDevedor": 0.0,
-    "id": 9,
-    "nome": "João Silva",
-    "endereco": "Rua A",
-    "telefone": "12345678",
-    "email": "joao@example.com",
-    "cpf": "111.111.111-11"
-  },
-  {
-    "plano": "Standard",
-    "saldoDevedor": 0.0,
-    "id": 9,
-    "nome": "Maria Souza",
-    "endereco": "Rua B",
-    "telefone": "87654321",
-    "email": "maria@example.com",
-    "cpf": "222.222.222-22"
-  },
-  {
-    "plano": "Premium",
-    "saldoDevedor": 0.0,
-    "id": 10,
-    "nome": "João Silva",
-    "endereco": "Rua A",
-    "telefone": "12345678",
-    "email": "joao@example.com",
-    "cpf": "111.111.111-11"
-  },
-  {
-    "plano": "Standard",
-    "saldoDevedor": 0.0,
-    "id": 10,
-    "nome": "Maria Souza",
-    "endereco": "Rua B",
-    "telefone": "87654321",
-    "email": "maria@example.com",
-    "cpf": "222.222.222-22"
+    "idCliente": 1,
+    "nome": "Gabriel",
+    "endereco": "cfasdf",
+    "telefone": "fsdfsd",
+    "email": "fds",
+    "cpf": "fdsf"
   }
 ]
