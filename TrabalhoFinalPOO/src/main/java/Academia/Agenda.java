@@ -1,21 +1,29 @@
 package Academia;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
+/**
+ * Classe que representa a agenda de uma aula.
+ */
 public class Agenda {
     private Calendar data;
     private boolean vagaDisponivel;
     private double valorAgendamento;
 
+    /**
+     * Construtor da classe Agenda.
+     *
+     * @param dataStr          Data do agendamento no formato "yyyy-MM-dd".
+     * @param vagaDisponivel   Indica se há vagas disponíveis para a aula.
+     * @param valorAgendamento Valor do agendamento da aula.
+     */
     public Agenda(String dataStr, boolean vagaDisponivel, double valorAgendamento) {
         this.data = Calendar.getInstance();
-        String[] partesData = dataStr.split("-"); // Supondo formato "yyyy-MM-dd"
+        String[] partesData = dataStr.split("-");
         int ano = Integer.parseInt(partesData[0]);
-        int mes = Integer.parseInt(partesData[1]) - 1; // Calendar usa meses baseados em 0 (Janeiro = 0)
+        int mes = Integer.parseInt(partesData[1]) - 1;
         int dia = Integer.parseInt(partesData[2]);
         this.data.set(ano, mes, dia);
-
         this.vagaDisponivel = vagaDisponivel;
         this.valorAgendamento = valorAgendamento;
     }
@@ -64,15 +72,11 @@ public class Agenda {
 
         while (diasUteis < 3) {
             dataComparada.add(Calendar.DAY_OF_MONTH, 1);
-
-            // Verifica se o dia é útil (segunda a sexta-feira)
             int diaSemana = dataComparada.get(Calendar.DAY_OF_WEEK);
             if (diaSemana != Calendar.SATURDAY && diaSemana != Calendar.SUNDAY) {
                 diasUteis++;
             }
         }
-
-        // Verifica se a data original do agendamento é antes da data calculada
         return !data.after(dataComparada);
     }
 

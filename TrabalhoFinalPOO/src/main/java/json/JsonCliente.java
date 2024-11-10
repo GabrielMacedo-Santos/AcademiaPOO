@@ -12,11 +12,19 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe responsável por manipular dados de clientes em formato JSON.
+ * Contém métodos para salvar, carregar, atualizar, remover e buscar clientes.
+ */
 public class JsonCliente {
 
     private static final String CLIENTE_JSON_PATH = "src/main/java/json/Cliente.json";
 
-    // Método para salvar uma lista completa de clientes no JSON
+    /**
+     * Salva uma lista de clientes no arquivo JSON.
+     * 
+     * @param clientes Lista de clientes a ser salva.
+     */
     public static void salvarClientes(List<Cliente> clientes) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(clientes);
@@ -30,7 +38,11 @@ public class JsonCliente {
         }
     }
 
-    // Método para carregar todos os clientes do arquivo JSON
+    /**
+     * Carrega todos os clientes a partir do arquivo JSON.
+     * 
+     * @return Lista de clientes carregados.
+     */
     public static List<Cliente> carregarClientes() {
         Gson gson = new Gson();
         List<Cliente> clientes = new ArrayList<>();
@@ -47,7 +59,11 @@ public class JsonCliente {
         return clientes;
     }
 
-    // Método para salvar um único cliente no JSON (atualiza ou adiciona)
+    /**
+     * Salva um único cliente no arquivo JSON, atualizando se o cliente já existir.
+     * 
+     * @param cliente Cliente a ser salvo.
+     */
     public static void salvarCliente(Cliente cliente) {
         List<Cliente> clientesExistentes = carregarClientes();
 
@@ -72,7 +88,11 @@ public class JsonCliente {
         salvarClientes(clientesExistentes);
     }
 
-    // Método para remover um cliente da lista pelo CPF
+    /**
+     * Remove um cliente da lista pelo CPF.
+     * 
+     * @param cpf CPF do cliente a ser removido.
+     */
     public static void removerCliente(String cpf) {
         List<Cliente> clientesExistentes = carregarClientes();
 
@@ -96,7 +116,12 @@ public class JsonCliente {
         salvarClientes(clientesExistentes);
     }
 
-    // Método para buscar um cliente pelo CPF
+    /**
+     * Busca um cliente pelo CPF.
+     * 
+     * @param cpf CPF do cliente a ser buscado.
+     * @return Cliente encontrado ou null se não encontrado.
+     */
     public static Cliente buscarCliente(String cpf) {
         List<Cliente> clientesExistentes = carregarClientes();
 

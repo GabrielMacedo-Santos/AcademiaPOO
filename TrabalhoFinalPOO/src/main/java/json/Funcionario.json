@@ -9,5 +9,16 @@
     "cpf": "312312",
     "usuario": "usuarioGabriel",
     "senha": "senha123"
+  },
+  {
+    "idFuncionario": "FUNC-1",
+    "cargo": "Administrador",
+    "nome": "Administrador Geral",
+    "endereco": "Rua A, 123",
+    "telefone": "9999-9999",
+    "email": "admin@academia.com",
+    "cpf": "123.456.789-00",
+    "usuario": "admin",
+    "senha": "senha123"
   }
 ]

@@ -1,15 +1,25 @@
 package GestaoPessoas;
 
+/**
+ * Classe abstrata que representa uma pessoa no sistema.
+ */
 public abstract class Pessoa {
-    // Atributos
+
     private String nome;
     private String endereco;
     private String telefone;
     private String email;
     private String cpf;
 
-
-    // Construtor
+    /**
+     * Construtor para inicializar os atributos de uma pessoa.
+     *
+     * @param nome     Nome da pessoa.
+     * @param endereco Endereço da pessoa.
+     * @param telefone Telefone da pessoa.
+     * @param email    Email da pessoa.
+     * @param cpf      CPF da pessoa.
+     */
     public Pessoa(String nome, String endereco, String telefone, String email, String cpf) {
         this.nome = nome;
         this.endereco = endereco;
@@ -18,7 +28,6 @@ public abstract class Pessoa {
         this.cpf = cpf;
     }
 
-    // Métodos Getters
     public String getNome() {
         return nome;
     }
@@ -39,7 +48,6 @@ public abstract class Pessoa {
         return cpf;
     }
 
-    // Métodos Setters
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -60,14 +68,13 @@ public abstract class Pessoa {
         this.cpf = cpf;
     }
 
+    /**
+     * Exibe os dados da pessoa.
+     */
     public abstract void exibirDados();
 
     @Override
     public String toString() {
         return "Nome: " + nome + "\nEndereço: " + endereco + "\nTelefone: " + telefone + "\nEmail: " + email;
-    }
-
-    public boolean logar(String usuario, String senha) {
-        return false;
     }
 }

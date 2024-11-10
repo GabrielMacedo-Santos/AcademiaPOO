@@ -2,15 +2,29 @@ package Loja;
 
 import java.util.ArrayList;
 
+/**
+ * Classe responsável por gerenciar vendas no sistema.
+ */
 public class GerenciarVenda {
     private Estoque estoque;
     private ArrayList<Venda> historicoVendas;
 
+    /**
+     * Construtor da classe GerenciarVenda.
+     * 
+     * @param estoque Estoque de produtos.
+     */
     public GerenciarVenda(Estoque estoque) {
         this.estoque = estoque;
         this.historicoVendas = new ArrayList<>();
     }
 
+    /**
+     * Realiza uma venda de um produto.
+     * 
+     * @param nomeProduto Nome do produto a ser vendido.
+     * @param quantidade Quantidade a ser vendida.
+     */
     public void realizarVenda(String nomeProduto, int quantidade) {
         Produto produto = estoque.buscarProduto(nomeProduto);
         
@@ -24,6 +38,9 @@ public class GerenciarVenda {
         }
     }
 
+    /**
+     * Lista o histórico de vendas realizadas.
+     */
     public void listarVendas() {
         if (historicoVendas.isEmpty()) {
             System.out.println("Nenhuma venda realizada até o momento.");
@@ -35,6 +52,11 @@ public class GerenciarVenda {
         }
     }
 
+    /**
+     * Calcula o valor total das vendas realizadas.
+     * 
+     * @return Valor total das vendas.
+     */
     public double calcularTotalVendas() {
         double total = 0;
         for (Venda venda : historicoVendas) {

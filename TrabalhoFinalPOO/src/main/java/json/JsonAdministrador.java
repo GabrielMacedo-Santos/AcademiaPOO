@@ -4,6 +4,7 @@ import GestaoPessoas.Administrador;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,14 +12,26 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe para manipular dados de administradores em JSON.
+ */
 public class JsonAdministrador {
+
     public static final String JSON_PATH = "src/main/java/json/Administrador.json";
 
+    /**
+     * Construtor padrão.
+     */
     public JsonAdministrador() {}
 
+    /**
+     * Salva uma lista de administradores no arquivo JSON.
+     * 
+     * @param novosAdministradores lista de administradores a ser salva
+     */
     public static void salvarAdministradores(List<Administrador> novosAdministradores) {
         List<Administrador> administradoresExistentes = carregar();
-        administradoresExistentes.addAll(novosAdministradores); // Adiciona novos administradores
+        administradoresExistentes.addAll(novosAdministradores);
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(administradoresExistentes);
@@ -32,6 +45,11 @@ public class JsonAdministrador {
         }
     }
 
+    /**
+     * Carrega a lista de administradores do arquivo JSON.
+     * 
+     * @return uma lista de administradores
+     */
     public static List<Administrador> carregar() {
         Gson gson = new Gson();
         List<Administrador> administradores = new ArrayList<>();

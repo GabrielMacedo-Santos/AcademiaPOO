@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
+    
     <groupId>com.mycompany</groupId>
     <artifactId>TrabalhoFinalPOO</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -47,6 +48,20 @@
                 <configuration>
                     <mainClass>SistemaDaAcademia.Academia</mainClass>
                 </configuration>
+            </plugin>
+
+            <!-- Plugin para gerar a documentação Javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>javadoc</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

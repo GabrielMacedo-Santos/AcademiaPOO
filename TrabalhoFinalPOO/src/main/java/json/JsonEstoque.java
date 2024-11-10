@@ -12,10 +12,19 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe responsável por manipular dados de estoque de produtos em formato JSON.
+ * Contém métodos para salvar e carregar produtos do estoque.
+ */
 public class JsonEstoque {
 
     private static final String ESTOQUE_JSON_PATH = "src/main/java/json/Estoque.json";
 
+    /**
+     * Salva uma lista de produtos no arquivo JSON.
+     * 
+     * @param produtos Lista de produtos a ser salva.
+     */
     public static void salvarEstoque(List<Produto> produtos) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(produtos);
@@ -29,6 +38,11 @@ public class JsonEstoque {
         }
     }
 
+    /**
+     * Carrega todos os produtos do estoque a partir do arquivo JSON.
+     * 
+     * @return Lista de produtos carregados.
+     */
     public static List<Produto> carregarEstoque() {
         Gson gson = new Gson();
         List<Produto> produtos = new ArrayList<>();

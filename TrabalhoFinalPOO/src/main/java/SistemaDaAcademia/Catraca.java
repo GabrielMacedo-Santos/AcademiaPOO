@@ -4,28 +4,44 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Classe responsável pelo controle de entradas e saídas de clientes na catraca da academia.
+ */
 public class Catraca {
     private List<String> registros; // Lista para armazenar registros de entrada e saída
 
+    /**
+     * Construtor que inicializa a lista de registros.
+     */
     public Catraca() {
         this.registros = new ArrayList<>();
     }
 
-    // Método para registrar a entrada de um cliente
+    /**
+     * Registra a entrada de um cliente.
+     *
+     * @param idCliente ID do cliente que está entrando
+     */
     public void registrarEntrada(int idCliente) {
         String registro = "Entrada - ID do Cliente: " + idCliente;
         registros.add(registro);
         System.out.println("Entrada registrada para o cliente com ID: " + idCliente);
     }
 
-    // Método para registrar a saída de um cliente
+    /**
+     * Registra a saída de um cliente.
+     *
+     * @param idCliente ID do cliente que está saindo
+     */
     public void registrarSaida(int idCliente) {
         String registro = "Saída - ID do Cliente: " + idCliente;
         registros.add(registro);
         System.out.println("Saída registrada para o cliente com ID: " + idCliente);
     }
 
-    // Método para exibir todos os registros de entrada e saída
+    /**
+     * Exibe todos os registros de entradas e saídas.
+     */
     public void exibirRegistros() {
         if (registros.isEmpty()) {
             System.out.println("Nenhum registro encontrado.");
@@ -37,7 +53,11 @@ public class Catraca {
         }
     }
 
-    // Método de gerenciamento de entradas e saídas
+    /**
+     * Gerencia as entradas e saídas de clientes através de um menu interativo.
+     *
+     * @param scanner Objeto Scanner para entrada de dados do usuário
+     */
     public void gerenciarCatraca(Scanner scanner) {
         System.out.println("\n=== Gerenciamento de Entradas e Saídas ===");
         System.out.println("1. Registrar Entrada");

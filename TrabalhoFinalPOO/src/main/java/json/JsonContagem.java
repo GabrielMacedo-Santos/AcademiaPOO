@@ -7,9 +7,19 @@ import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Classe responsável por manipular dados de contagem (clientes e produtos) em formato JSON.
+ * Contém métodos para salvar e carregar contagens de clientes e produtos.
+ */
 public class JsonContagem {
     private static final String JSON_PATH = "src/main/java/json/Contagem.json";
 
+    /**
+     * Salva a contagem de clientes e produtos no arquivo JSON.
+     * 
+     * @param contadorClientes Contador de clientes.
+     * @param contadorProdutos Contador de produtos.
+     */
     public static void salvarContagem(int contadorClientes, int contadorProdutos) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Contagem contagem = new Contagem(contadorClientes, contadorProdutos);
@@ -23,6 +33,11 @@ public class JsonContagem {
         }
     }
 
+    /**
+     * Carrega a contagem de clientes e produtos a partir do arquivo JSON.
+     * 
+     * @return Contagem carregada ou uma contagem com valores padrão caso ocorra erro.
+     */
     public static Contagem carregarContagem() {
         Gson gson = new Gson();
         try (FileReader reader = new FileReader(JSON_PATH)) {
@@ -34,7 +49,9 @@ public class JsonContagem {
         }
     }
 
-    // Classe interna para armazenar contagem
+    /**
+     * Classe interna para armazenar a contagem de clientes e produtos.
+     */
     private static class Contagem {
         private int contadorClientes;
         private int contadorProdutos;

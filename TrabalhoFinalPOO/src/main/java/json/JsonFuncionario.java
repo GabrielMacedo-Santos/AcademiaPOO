@@ -1,4 +1,3 @@
-// Classe JsonFuncionario
 package json;
 
 import com.google.gson.Gson;
@@ -15,13 +14,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Classe responsável por manipular dados de funcionários em formato JSON.
+ * Contém métodos para salvar, carregar, atualizar e remover funcionários.
+ */
 public class JsonFuncionario {
 
     private static final String FUNCIONARIO_JSON_PATH = "src/main/java/json/Funcionario.json";
     private static final Logger LOGGER = Logger.getLogger(JsonFuncionario.class.getName());
 
-    // Método para salvar uma lista de funcionários
-    public static synchronized void salvarFuncionarios(List<Funcionario> funcionarios) {
+    /**
+     * Salva uma lista de funcionários no arquivo JSON.
+     * 
+     * @param funcionarios Lista de funcionários a ser salva.
+     */
+    public static void salvarFuncionarios(List<Funcionario> funcionarios) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(funcionarios);
 
@@ -33,7 +40,11 @@ public class JsonFuncionario {
         }
     }
 
-    // Método para carregar todos os funcionários do arquivo JSON
+    /**
+     * Carrega todos os funcionários a partir do arquivo JSON.
+     * 
+     * @return Lista de funcionários carregados.
+     */
     public static List<Funcionario> carregarFuncionarios() {
         Gson gson = new Gson();
         List<Funcionario> funcionarios = new ArrayList<>();
@@ -41,10 +52,6 @@ public class JsonFuncionario {
         try (FileReader reader = new FileReader(FUNCIONARIO_JSON_PATH)) {
             Type funcionarioListType = new TypeToken<List<Funcionario>>() {}.getType();
             funcionarios = gson.fromJson(reader, funcionarioListType);
-
-            if (funcionarios == null) {
-                funcionarios = new ArrayList<>();
-            }
             LOGGER.log(Level.INFO, "Funcionários carregados com sucesso!");
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Erro ao carregar funcionários!", e);
@@ -53,15 +60,21 @@ public class JsonFuncionario {
         return funcionarios;
     }
 
-    // Método para salvar um único funcionário
-    public static synchronized void salvarFuncionario(Funcionario funcionario) {
+    /**
+     * Salva um único funcionário no arquivo JSON.
+     * 
+     * @param funcionario Funcionario a ser salvo.
+     */
+    public static void salvarFuncionario(Funcionario funcionario) {
         List<Funcionario> funcionariosExistentes = carregarFuncionarios();
 
-        // Verifica se o funcionário já existe e atualiza, se necessário
+        // Verifica se o funcionário já existe para evitar duplicidade
         boolean funcionarioExiste = false;
         for (int i = 0; i < funcionariosExistentes.size(); i++) {
-            if (funcionariosExistentes.get(i).getIdFuncionario().equals(funcionario.getIdFuncionario())) {
-                funcionariosExistentes.set(i, funcionario); // Atualiza os dados do funcionário existente
+            Funcionario f = funcionariosExistentes.get(i);
+            if (f.getCpf().equals(funcionario.getCpf())) {
+                // Atualiza os dados do funcionário existente
+                funcionariosExistentes.set(i, funcionario);
                 funcionarioExiste = true;
                 break;
             }
@@ -74,22 +87,33 @@ public class JsonFuncionario {
 
         // Salva a lista atualizada no arquivo JSON
         salvarFuncionarios(funcionariosExistentes);
-        LOGGER.log(Level.INFO, "Funcionário com ID " + funcionario.getIdFuncionario() + " salvo com sucesso!");
     }
 
-    // Método para remover um funcionário do JSON
-    public static synchronized void removerFuncionario(String idFuncionario) {
-        List<Funcionario> funcionarios = carregarFuncionarios();
+    /**
+     * Remove um funcionário da lista pelo CPF.
+     * 
+     * @param cpf CPF do funcionário a ser removido.
+     */
+    public static void removerFuncionario(String cpf) {
+        List<Funcionario> funcionariosExistentes = carregarFuncionarios();
 
-        // Tenta remover o funcionário da lista
-        boolean removed = funcionarios.removeIf(funcionario -> funcionario.getIdFuncionario().equals(idFuncionario));
-
-        // Verifica se a remoção foi bem-sucedida e salva a lista atualizada no JSON
-        if (removed) {
-            salvarFuncionarios(funcionarios);
-            LOGGER.log(Level.INFO, "Funcionário com ID " + idFuncionario + " removido com sucesso!");
-        } else {
-            LOGGER.log(Level.WARNING, "Funcionário com ID " + idFuncionario + " não encontrado.");
+        // Encontra e remove o funcionário pelo CPF
+        Funcionario funcionarioParaRemover = null;
+        for (Funcionario funcionario : funcionariosExistentes) {
+            if (funcionario.getCpf().equals(cpf)) {
+                funcionarioParaRemover = funcionario;
+                break;
+            }
         }
+
+        if (funcionarioParaRemover != null) {
+            funcionariosExistentes.remove(funcionarioParaRemover);
+            LOGGER.log(Level.INFO, "Funcionário com CPF {0} removido com sucesso.", cpf);
+        } else {
+            LOGGER.log(Level.WARNING, "Funcionário com CPF {0} não encontrado.", cpf);
+        }
+
+        // Salva a lista atualizada no arquivo JSON
+        salvarFuncionarios(funcionariosExistentes);
     }
 }

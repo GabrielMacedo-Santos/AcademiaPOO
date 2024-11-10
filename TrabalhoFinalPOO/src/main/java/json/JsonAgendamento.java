@@ -12,10 +12,21 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe responsável por salvar e carregar agendamentos em formato JSON.
+ */
 public class JsonAgendamento {
 
+    /**
+     * Caminho para o arquivo JSON de agendamentos.
+     */
     private static final String AGENDAMENTO_JSON_PATH = "src/main/java/json/Agendamento.json";
 
+    /**
+     * Salva uma lista de agendamentos no arquivo JSON.
+     * 
+     * @param agendamentos Lista de agendamentos a serem salvos.
+     */
     public static void salvarAgendamentos(List<Agenda> agendamentos) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(agendamentos);
@@ -29,6 +40,11 @@ public class JsonAgendamento {
         }
     }
 
+    /**
+     * Carrega a lista de agendamentos a partir do arquivo JSON.
+     * 
+     * @return Lista de agendamentos carregados.
+     */
     public static List<Agenda> carregarAgendamentos() {
         Gson gson = new Gson();
         List<Agenda> agendamentos = new ArrayList<>();

@@ -1,29 +1,26 @@
 package GestaoPessoas;
 
 import json.JsonFuncionario;
-
 import java.util.List;
 
+/**
+ * Classe que representa um Administrador, responsável por gerenciar funcionários.
+ */
 public class Administrador extends Funcionario {
 
     public Administrador(String usuario, String senha, String nome, String endereco, String telefone, String email, String cpf) {
         super(usuario, senha, nome, endereco, telefone, email, cpf, "Administrador");
     }
 
-    // Métodos para gerenciar funcionários
-
-    // Método para adicionar um funcionário
     public void adicionarFuncionario(Funcionario funcionario) {
-        JsonFuncionario.salvarFuncionario(funcionario); // Salva o novo funcionário ou atualiza se já existir
+        JsonFuncionario.salvarFuncionario(funcionario);
         System.out.println("Funcionário " + funcionario.getNome() + " adicionado.");
     }
 
-    // Método para remover um funcionário pelo ID
     public void removerFuncionario(String idFuncionario) {
-        JsonFuncionario.removerFuncionario(idFuncionario); // Remove o funcionário pelo ID do JSON
+        JsonFuncionario.removerFuncionario(idFuncionario);
     }
 
-    // Método para editar um funcionário
     public void editarFuncionario(String idFuncionario, String novoNome, String novoEndereco, String novoTelefone, String novoEmail, String novoCargo) {
         List<Funcionario> funcionarios = JsonFuncionario.carregarFuncionarios();
         for (Funcionario funcionario : funcionarios) {
@@ -33,7 +30,7 @@ public class Administrador extends Funcionario {
                 funcionario.setTelefone(novoTelefone);
                 funcionario.setEmail(novoEmail);
                 funcionario.setCargo(novoCargo);
-                JsonFuncionario.salvarFuncionario(funcionario); // Atualiza e salva o funcionário no JSON
+                JsonFuncionario.salvarFuncionario(funcionario);
                 System.out.println("Funcionário com ID " + idFuncionario + " editado com sucesso.");
                 return;
             }
@@ -41,7 +38,6 @@ public class Administrador extends Funcionario {
         System.out.println("Funcionário com ID " + idFuncionario + " não encontrado.");
     }
 
-    // Método para listar todos os funcionários
     public void listarFuncionarios() {
         List<Funcionario> funcionarios = JsonFuncionario.carregarFuncionarios();
         if (funcionarios.isEmpty()) {

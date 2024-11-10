@@ -4,20 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Classe LojaEstoque que gerencia o estoque de produtos em uma loja.
+ */
 public class LojaEstoque {
     private List<Produto> produtos; // Lista para armazenar produtos no estoque
 
+    /**
+     * Construtor da classe LojaEstoque.
+     * Inicializa a lista de produtos.
+     */
     public LojaEstoque() {
         this.produtos = new ArrayList<>();
     }
 
-    // Método para adicionar um produto ao estoque
+    /**
+     * Adiciona um produto ao estoque.
+     * @param produto O produto a ser adicionado.
+     */
     public void adicionarProduto(Produto produto) {
         produtos.add(produto);
         System.out.println("Produto " + produto.getNome() + " adicionado ao estoque.");
     }
 
-    // Método para remover um produto do estoque
+    /**
+     * Remove um produto do estoque pelo nome.
+     * @param nomeProduto O nome do produto a ser removido.
+     */
     public void removerProduto(String nomeProduto) {
         Produto produtoEncontrado = null;
         for (Produto produto : produtos) {
@@ -34,7 +47,9 @@ public class LojaEstoque {
         }
     }
 
-    // Método para listar todos os produtos no estoque
+    /**
+     * Lista todos os produtos no estoque.
+     */
     public void listarProdutos() {
         if (produtos.isEmpty()) {
             System.out.println("Nenhum produto no estoque.");
@@ -46,7 +61,10 @@ public class LojaEstoque {
         }
     }
 
-    // Método de gerenciamento do estoque
+    /**
+     * Gerencia o estoque permitindo adicionar, remover e listar produtos.
+     * @param scanner O scanner para entrada de dados do usuário.
+     */
     public void gerenciarEstoque(Scanner scanner) {
         System.out.println("\n=== Gerenciamento de Estoque ===");
         System.out.println("1. Adicionar Produto");

@@ -1,5 +1,8 @@
 package Autenticacao;
 
+/**
+ * Classe abstrata para representar um usuário do sistema.
+ */
 public abstract class Usuario {
     private String usuario;
     private String senha;
@@ -27,8 +30,6 @@ public abstract class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" +
-                "usuario='" + usuario + '\'' +
-                '}';
+        return "Usuario{" + "usuario='" + usuario + '\'' + '}';
     }
 }
