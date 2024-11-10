@@ -64,4 +64,13 @@ public class GerenciarVenda {
         }
         return total;
     }
+
+    /**
+     * Getter para o estoque associado a GerenciarVenda.
+     * 
+     * @return Estoque de produtos.
+     */
+    public Estoque getEstoque() {
+        return estoque;
+    }
 }

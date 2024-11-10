@@ -20,5 +20,38 @@
     "cpf": "123.456.789-00",
     "usuario": "admin",
     "senha": "senha123"
+  },
+  {
+    "idFuncionario": "FUNC-2",
+    "cargo": "dsadas",
+    "nome": "sdas",
+    "endereco": "dsada",
+    "telefone": "asdas",
+    "email": "dsadas",
+    "cpf": "dsads",
+    "usuario": "usuariosdas",
+    "senha": "senha123"
+  },
+  {
+    "idFuncionario": "FUNC-2",
+    "cargo": "dsa",
+    "nome": "sad",
+    "endereco": "dsadas",
+    "telefone": "dasd",
+    "email": "asd",
+    "cpf": "sa",
+    "usuario": "usuariosad",
+    "senha": "senha123"
+  },
+  {
+    "idFuncionario": "FUNC-2",
+    "cargo": "rwe",
+    "nome": "Teste",
+    "endereco": "rew",
+    "telefone": "rew",
+    "email": "rwer",
+    "cpf": "ew",
+    "usuario": "usuarioTeste",
+    "senha": "senha123"
   }
 ]
